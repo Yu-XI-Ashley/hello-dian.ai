@@ -51,7 +51,7 @@ class Module(object):
 
 class Linear(Module):
 
-    def __init__(self, in_length: int, out_length: int):
+    def __init__(self, in_length: int, out_length: int,x):
         """Module which applies linear transformation to input.
 
         Args:
@@ -62,7 +62,8 @@ class Linear(Module):
         # TODO Initialize the weight
         # of linear module.
 
-        ...
+        self.w = np.zeros((in_length, out_length))
+        self.x = x
 
         # End of todo
 
@@ -78,7 +79,8 @@ class Linear(Module):
         # TODO Implement forward propogation
         # of linear module.
 
-        ...
+        out = np.dot(x, self.w)
+        return out
 
         # End of todo
 
@@ -95,9 +97,12 @@ class Linear(Module):
         # TODO Implement backward propogation
         # of linear module.
 
-        ...
+        self.wgrad = np.dot(np.transpose(self.x), dy)
+        dx = np.dot(dy, np.transpose(self.w))
+        return dx
 
         # End of todo
+
 
 
 class BatchNorm1d(Module):
